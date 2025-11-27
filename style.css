@@ -1,5 +1,155 @@
+:root {
+  --primarycolor: green;
+  --secondarycolor: lightgreen;
+  --buttoncolor: yellow;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+.flex {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+body {
+  margin: 0;
+  font-size: 1.2rem;
+}
+
 .arbutus-regular {
   font-family: "Arbutus", serif;
   font-weight: 400;
   font-style: normal;
+}
+
+.wrapper {
+  background: linear-gradient(var(--buttoncolor), var(--primarycolor));
+  min-height: 100vh;
+}
+
+.calculator {
+  background: rgb(182, 181, 181);
+  width: 400px;
+  padding: 2rem 1.5rem;
+  border-radius: 10px;
+
+  display: grid;
+  gap: 1rem;
+  grid-template-areas:
+    "display display display display"
+    "ac c percent divide"
+    "btn7 btn8 btn9 multiplying "
+    "btn4 btn5 btn6 minus"
+    "btn1 btn2 btn3 plus"
+    "btn0 btndot equal equal";
+
+  transform: perspective(70rem) rotateX(30deg);
+}
+
+.display {
+  background: var(--secondarycolor);
+  padding: 1rem;
+  font-size: 1.5rem;
+  border-radius: 10px;
+  text-align: end;
+  font-weight: bolder;
+  box-shadow: 0 10px 5px rgba(128, 128, 128, 0.527);
+  grid-area: display;
+}
+
+.calculator .btn {
+  background: var(--buttoncolor);
+  height: 50px;
+  border-radius: 5px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  box-shadow: 0 10px 5px rgba(128, 128, 128, 0.527);
+}
+
+.calculator .btn:hover {
+  cursor: pointer;
+  transform: scale(1.035);
+  background: var(--secondarycolor);
+  transition: all 0.3s;
+}
+
+.btn-ac {
+  grid-area: ac;
+}
+
+.btn-c {
+  grid-area: c;
+}
+
+.btn-percentage {
+  grid-area: percent;
+}
+
+.btn-divide {
+  grid-area: divide;
+}
+
+.btn-7 {
+  grid-area: btn7;
+}
+
+.btn-8 {
+  grid-area: btn8;
+}
+
+.btn-9 {
+  grid-area: btn9;
+}
+
+.btn-multiply {
+  grid-area: multiplying;
+}
+
+.btn-4 {
+  grid-area: btn4;
+}
+
+.btn-5 {
+  grid-area: btn5;
+}
+
+.btn-6 {
+  grid-area: btn6;
+}
+
+.btn-minus {
+  grid-area: minus;
+}
+
+.btn-1 {
+  grid-area: btn1;
+}
+
+.btn-2 {
+  grid-area: btn2;
+}
+
+.btn-3 {
+  grid-area: btn3;
+}
+
+.btn-plus {
+  grid-area: plus;
+}
+
+.btn-0 {
+  grid-area: btn0;
+}
+
+.btn-dot {
+  grid-area: btndot;
+}
+
+.btn-equal {
+  grid-area: equal;
 }
