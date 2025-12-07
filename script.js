@@ -69,7 +69,13 @@ const buttonAddingToString = (buttonText) => {
 // Getting into each button with forEach method and trying to get each button. After
 // that making each button clickable
 allbuttonsElm.forEach((btn) => {
+  btn.addEventListener("mousedown", () => {
+    btn.style.background = "white";
+    btn.style.scale = "0.9";
+  });
   btn.addEventListener("click", () => {
+    btn.style.background = "yellow";
+    btn.style.scale = "1";
     const value = btn.innerText;
     buttonAddingToString(value);
   });
