@@ -1,78 +1,98 @@
-const allButtonsElement = document.querySelectorAll(".btn");
+const allbuttonsElm = document.querySelectorAll(".btn");
 const displayElm = document.querySelector(".display");
-// console.log(allButtonsElement);
 
-let calculus = "";
-
-const operators = ["%", "/", "*", "-", "+"];
+let strToDisplay = "";
 
 let lastOperator = "";
 
-const buttonAction = (val) => {
-  console.log(val);
+const operators = ["%", "/", "*", "-", "+"];
 
-  if (val === "AC") {
-    calculus = "";
-
-    return display();
+// To retrive the actual value or text of buttons after getting clicked and passing
+// to display function
+const buttonAddingToString = (buttonText) => {
+  displayElm.classList.remove("prank");
+  console.log(buttonText);
+  if (buttonText === "AC") {
+    strToDisplay = "";
+    return display(strToDisplay);
   }
 
-  if (val === "C") {
-    // calculus = calculus.slice(0, -1);
-    calculus = calculus.slice(0, -1);
-
-    return displayTotal();
+  if (buttonText === "C") {
+    console.log(strToDisplay);
+    strToDisplay = strToDisplay.slice(0, -1);
+    return display(strToDisplay);
   }
 
-  if (val === "=") {
+  if (buttonText === "=") {
     lastOperator = "";
-    const lastChar = calculus.charAt(calculus.length - 1);
-    if (operators.includes(lastChar)) {
-      calculus = calculus.slice(0, -1);
-    }
-    return displayTotal();
-  }
-  // Allowing only one "." per number set
+    const lastCharacter = strToDisplay.charAt(strToDisplay.length - 1);
 
-  if (val === ".") {
-    const lastOperatorIndex = calculus.lastIndexOf(lastOperator);
-    const lastNumberSet = calculus.slice(lastOperatorIndex);
-    if (lastNumberSet === ".") {
-      return;
+    if (operators.includes(lastCharacter)) {
+      strToDisplay = strToDisplay.slice(0, -1);
     }
-    if (!lastOperator && calculus.includes(".")) {
-      return;
+    return calculatingTotal();
+  }
+
+  if (operators.includes(buttonText)) {
+    lastOperator = buttonText;
+    const lastCharacter = strToDisplay.charAt(strToDisplay.length - 1);
+    if (operators.includes(lastCharacter)) {
+      strToDisplay = strToDisplay.slice(0, -1);
     }
   }
 
-  if (operators.includes(val)) {
-    lastOperator = val;
-    const lastChar = calculus.charAt(calculus.length - 1);
-    if (operators.includes(lastChar)) {
-      calculus = calculus.slice(0, -1);
+  if (buttonText === ".") {
+    const lastOperatorIndex = strToDisplay.lastIndexOf(lastOperator);
+    const lastNumberSet = strToDisplay.slice(lastOperatorIndex);
+
+    // Checking the condition of initial number set where there'll not be any latest
+    // operator
+
+    if (!lastOperator && strToDisplay.includes(".")) {
+      return;
+    }
+
+    // Checking the condition of number sets after initial number set where
+    // there'll be latest operator before number set
+
+    if (lastNumberSet.includes(".")) {
+      return;
     }
   }
-  calculus += val;
-  display(calculus);
+  strToDisplay += buttonText;
+  display(strToDisplay);
 };
 
-allButtonsElement.forEach((btn) => {
-  //   console.log(btn);
-
+// Getting into each button with forEach method and trying to get each button. After
+// that making each button clickable
+allbuttonsElm.forEach((btn) => {
   btn.addEventListener("click", () => {
-    const btnText = btn.innerText;
-    buttonAction(btnText);
+    const value = btn.innerText;
+    buttonAddingToString(value);
   });
 });
 
+// Whatever buttons are clicked, they're simply displaying in display element
 const display = (str) => {
   displayElm.innerText = str || "0.0";
 };
 
-// calculate
+// Calculate total
+const calculatingTotal = () => {
+  const randomExtraValue = randomValue();
+  if (randomExtraValue) {
+    changeDisplayForRandomNum();
+  }
+  const total = eval(strToDisplay) + randomExtraValue;
+  strToDisplay = total.toString();
+  return display(strToDisplay);
+};
+const randomValue = () => {
+  const randomNum = Math.round(Math.random() * 10);
 
-const displayTotal = () => {
-  const total = eval(calculus);
-  display(total);
-  calculus = total.toString();
+  return randomNum < 3 ? randomNum : 0;
+};
+
+const changeDisplayForRandomNum = () => {
+  displayElm.classList.add("prank");
 };

@@ -153,3 +153,24 @@ body {
 .btn-equal {
   grid-area: equal;
 }
+
+.prank {
+  background: red;
+  color: white;
+  animation: shaking 0.5s linear;
+}
+
+@keyframes shaking {
+  0% {
+    transform: translateX(10px);
+  }
+  45% {
+    transform: translateX(-10px);
+  }
+  75% {
+    transform: translateX(10px);
+  }
+  100% {
+    transform: translateX(-10px);
+  }
+}
