@@ -46,7 +46,7 @@ body {
     "btn1 btn2 btn3 plus"
     "btn0 btndot equal equal";
 
-  transform: perspective(70rem) rotateX(30deg);
+  transform: perspective(70rem) rotateX(40deg);
 }
 
 .display {

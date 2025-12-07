@@ -5,6 +5,9 @@ let strToDisplay = "";
 
 let lastOperator = "";
 
+// loading audio
+const audio = new Audio("./assets/prank.mp3");
+
 const operators = ["%", "/", "*", "-", "+"];
 
 // To retrive the actual value or text of buttons after getting clicked and passing
@@ -82,6 +85,7 @@ const calculatingTotal = () => {
   const randomExtraValue = randomValue();
   if (randomExtraValue) {
     changeDisplayForRandomNum();
+    audio.play();
   }
   const total = eval(strToDisplay) + randomExtraValue;
   strToDisplay = total.toString();
